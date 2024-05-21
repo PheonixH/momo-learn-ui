@@ -1,6 +1,4 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 import Login from "@/components/sys/login/Login.vue";
 import {ConfigProvider} from 'ant-design-vue';
 import enUS from 'ant-design-vue/es/locale/en_US';
@@ -25,17 +23,7 @@ const themeConfig = computed(() =>
 </script>
 
 <template>
-  <!--  <header>-->
-  <!--    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />-->
 
-  <!--    <div class="wrapper">-->
-  <!--      <HelloWorld msg="You did it!" />-->
-  <!--    </div>-->
-  <!--  </header>-->
-
-  <!--  <main>-->
-  <!--    <TheWelcome />-->
-  <!--  </main>-->
   <div style="margin-bottom: 16px">
     <span style="margin-right: 16px">Change locale of components:</span>
     <a-radio-group v-model:value="locale">
@@ -43,9 +31,9 @@ const themeConfig = computed(() =>
       <a-radio-button key="cn" :value="zhCN.locale">中文</a-radio-button>
     </a-radio-group>
   </div>
+
   <ConfigProvider :locale="locale" :theme="themeConfig">
     <Login/>
-    <TheWelcome />
   </ConfigProvider>
 </template>
 
