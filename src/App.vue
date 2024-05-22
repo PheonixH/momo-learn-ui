@@ -1,67 +1,24 @@
-<script setup>
-import Login from "@/components/sys/login/Login.vue";
-import {ConfigProvider} from 'ant-design-vue';
-import enUS from 'ant-design-vue/es/locale/en_US';
-import zhCN from 'ant-design-vue/es/locale/zh_CN';
-import {computed, ref} from "vue";
-
-const locale = ref(enUS.locale);
-
-const themeConfig = computed(() =>
-    Object.assign(
-        {
-          token: {
-            colorPrimary: '#0960bd',
-            colorSuccess: '#55D187',
-            colorWarning: '#EFBD47',
-            colorError: '#ED6F6F',
-            colorInfo: '#0960bd',
-          },
-        },
-    ),
-);
-</script>
-
 <template>
-
-  <div style="margin-bottom: 16px">
-    <span style="margin-right: 16px">Change locale of components:</span>
-    <a-radio-group v-model:value="locale">
-      <a-radio-button key="en" :value="enUS.locale">English</a-radio-button>
-      <a-radio-button key="cn" :value="zhCN.locale">中文</a-radio-button>
-    </a-radio-group>
-  </div>
-
-  <ConfigProvider :locale="locale" :theme="themeConfig">
-    <Login/>
-  </ConfigProvider>
+  <router-link :to="{name:'About'}">to about</router-link>
+  <button @click="toAbout">about</button>
+  <br>
+  <router-link to="/home">to home</router-link>
+  <button @click="toHome">home</button>
+  <!-- routerlink相当于是一个<a>标签，点击后会跳转到相应的路径 -->
+  <router-view></router-view>
+  <!-- /home和/about路径对应的组件，将会在router-view的位置呈现 -->
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+<script>
+import {useRouter} from 'vue-router'
+export default {
+  setup(){
+    let router = useRouter()
+    return {
+      toAbout: ()=>{router.push({path:'/about'})}, //除了router-link标签，还可以通过编程式路由进行跳转
+      toHome: ()=>{router.push({path:'/home'})}
+    }
   }
 }
-</style>
+</script>
+<style></style>
